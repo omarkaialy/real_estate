@@ -491,11 +491,7 @@ button {
 /* For small devices */
 @media screen and(max-width:320px) {
   .wave {
-    position: absolute;
-    width: 100%;
-    bottom: -100px;
-    opacity: 1;
-    color: #fff;
+    display: none;
   }
   .nav__menu {
     padding: 1.3rem, 1.5rem;
@@ -527,7 +523,7 @@ button {
   .wave {
     position: absolute;
     width: 100%;
-    bottom: -160px;
+    bottom: -140px;
     opacity: 1;
     color: #fff;
   }
@@ -574,10 +570,3 @@ button {
   }
 }
 /* For 2K & 4K resolutions */
-.wave {
-  position: absolute;
-  width: 100%;
-  bottom: -200px;
-  opacity: 1;
-  color: #fff;
-}
