@@ -1,7 +1,14 @@
 /*=============== CHANGE BACKGROUND HEADER ===============*/
 
 /*=============== SWIPER POPULAR ===============*/
-
+var swiperPopular = new Swiper(".popular__container", {
+  spaceBetween: 32,
+  grabcursor: true,
+  centeredslides: true,
+  slidesperview: "auto",
+  loop: true,
+  navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+});
 /*=============== VALUE ACCORDION ===============*/
 const accordionItems = document.querySelectorAll(".value__accordion-item");
 accordionItems.forEach((item) => {
