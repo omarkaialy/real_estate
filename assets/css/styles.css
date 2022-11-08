@@ -577,7 +577,7 @@ button {
 .wave {
   position: absolute;
   width: 100%;
-  bottom: -140px;
+  bottom: -90px;
   opacity: 1;
   color: #fff;
 }
