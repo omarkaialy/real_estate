@@ -122,11 +122,11 @@ transition: .3s;}
 
 /*=============== REUSABLE CSS CLASSES ===============*/
 .container {
-  /* max-width: 1024px; */
+  max-width: 1024px;
   margin-left: 1.5rem;
-  /* margin-right: 1.5rem; */
+  margin-right: 1.5rem;
 }
-
+.nav{max-width: 100%;}
 .grid {
   display: grid;
 }
@@ -183,7 +183,7 @@ transition: .3s;}
 }
 .nav__logo:hover {
   color: var(--first-color);
-}
+} .nav__link:hover{ color: blue; }
 @media screen and (max-width: 1023px) {
   .nav__menu {
     position: fixed;
