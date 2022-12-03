@@ -122,9 +122,9 @@ transition: .3s;}
 
 /*=============== REUSABLE CSS CLASSES ===============*/
 .container {
-  max-width: 1024px;
+  /* max-width: 1024px; */
   margin-left: 1.5rem;
-  margin-right: 1.5rem;
+  /* margin-right: 1.5rem; */
 }
 
 .grid {
@@ -738,8 +738,8 @@ justify-content: center;}
   .wave {
     position: absolute;
     width: 100%;
-    bottom: -270px;
-    opacity: 1;
+    bottom: -25%;
+    opacity: .5;
     color: #fff;
   }
   .nav__menu {
