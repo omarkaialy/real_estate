@@ -232,6 +232,7 @@ box-shadow: 0 4px 8px hsla(228, 66% ,45% ,.25);
 }
 /*=============== HOME ===============*/
 .home--wrap {
+  display: flex;
   padding-top: 4rem;
   row-gap: 3.5rem;
   background-image: linear-gradient(
@@ -308,14 +309,45 @@ box-shadow: 0 4px 8px hsla(228, 66% ,45% ,.25);
   transition: 0.3s;
   cursor: pointer;
 }
-/*=============== LOGOS ===============*/
-
-/*=============== POPULAR ===============*/
+/*=============== Modal ===============*/
+.close__button {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}.close__button:hover,
+.close__button:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.modal-content {
+  background-color: #fefefe;display: block  ;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+.modal {
+  display: none;  position: fixed; z-index: 1; 
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
+} /*=============== POPULAR ===============*/
+.popular{
+  display: flex;
+  justify-content: center;}
 .popular__container {
   padding: 1rem 0 5rem;
 }
 
 .popular__card {
+  cursor: pointer;
   width: 290px;
   background-color: var(--container-color);
   padding: 0.5rem 0.5rem 1.5rem;
@@ -705,9 +737,7 @@ justify-content: center;}
 }
 
 @media screen and(max-width:320px) {
-  .wave {
-    display: none;
-  }
+  
   .nav__menu {
     padding: 1.3rem, 1.5rem;
   }
@@ -735,17 +765,12 @@ justify-content: center;}
 }
 /* For medium devices */
 @media screen and (min-width: 576px) {
-  .wave {
-    position: absolute;
-    width: 100%;
-    bottom: -25%;
-    opacity: .5;
-    color: #fff;
-  }
+ 
   .nav__menu {
     width: 342px;
   }
-  .home__search{width: 412px;}
+  .home__search{width: 95%;
+  margin-bottom: 3rem;}
 .contact__card{grid-template-columns: repeat(2,192px);}
 .footer--content{grid-template-columns: repeat(3,max-content);}
 }
@@ -754,7 +779,7 @@ justify-content: center;}
   .value__container ,.contact__container{
     grid-template-columns: repeat(2, 1fr);
     align-items: center;
-  }
+  }.home__search{width:120%}
 .contact__images{order: 1;}
 .contact__card{justify-content: initial;}
 .subscribe__container{padding: 3rem 13rem;}
@@ -801,7 +826,7 @@ justify-content: center;}
 .home{padding-bottom: 0;}
 .home__data{padding-bottom: 4rem;}
 .home__title{margin-bottom: 2rem;}
-.home__description , .home__search{margin-bottom: 3rem;}
+.home__description , .home__search{margin-bottom: 3rem;width:140% }
 .home__value{column-gap: 3.5rem ;}
 .popular__card{width: 320px;padding: .75rem .75rem 2rem;}
 .popular__data{padding: 0 .25rem  .75rem ;}

@@ -60,7 +60,7 @@
         </div>
         <!-- Theme Change Button -->
         <i class="bx bx-moon change-theme" id="theme-button"></i>
-        <a href="#" class="button nav__button">Subscribe</a>
+        <a class="button nav__button subscribe__button">Subscribe</a>
       </nav>
     </header>
 
@@ -113,17 +113,7 @@
           </div>
         </div>
       </div>
-      <svg
-        class="wave"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1440 320"
-      >
-        <path
-          fill="#fff"
-          fill-opacity="1"
-          d="M0,224L80,234.7C160,245,320,267,480,261.3C640,256,800,224,960,202.7C1120,181,1280,171,1360,165.3L1440,160L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
-        ></path>
-      </svg>
+   
 
       <!--==================== POPULAR ====================-->
       <section class="popular section" id="popular">
@@ -396,7 +386,7 @@
             Subscribe and find super attractive price quotes from us, Find your
             residence soon
           </p>
-          <a href="#" class="button subscribe__button"> Get Started </a>
+          <a class="button subscribe__button"> Get Started </a>
         </div>
       </section>
     </main>
@@ -495,7 +485,35 @@
         </div>
       </div>
     </footer>
-
+    <!-- Modal To Create A new House -->
+    <div id="modal__add" class="modal">
+      <div class="modal-content">
+        <ul class="add__element">
+          <li class="add__header"><h1>Add A New Property</h1></li>
+          <li>
+            <input id="username" type="text" placeholder="Property Name" />
+          </li>
+          <input id="email" type="number" placeholder="Property Price" />
+          <li>
+            <input
+              id="password"
+              type="text"
+              placeholder="Property Address"
+            />
+          </li>
+          <li>
+            <li><input
+              type="file"
+              class="imageFile"
+              id="imageFile"
+              accept="image/*"
+            /></li>
+            <button class="close__button" id="close_modal">Close</button> 
+            <button class="create__button" id="createbtn">Create</button> 
+          </li>
+        </ul>
+      </div>
+    </div>
     <!--========== SCROLL UP ==========-->
     <a href="#" class="scroll-up" id="scroll-up">
       <i class="bx bx-chevrons-up" />
@@ -508,5 +526,17 @@
 
     <!--=============== MAIN JS ===============-->
     <script src="assets/js/main.js"></script>
+    <!-- Parse Api Js -->
+    <script
+      type="text/javascript"
+      src="https://npmcdn.com/parse/dist/parse.min.js"
+    ></script>
+    <script>
+      Parse.initialize(
+        "9BYeqFPjenExpHLac2C152BxKWsd92GDu2MLScb9",
+        "XJjp3TBQhiHOtPfi0gZoIScOzLiiAVpQK805Oi71"
+      ); //PASTE HERE YOUR Back4App APPLICATION ID AND YOUR JavaScript KEY
+      Parse.serverURL = "https://parseapi.back4app.com/";
+    </script>
   </body>
 </html>
