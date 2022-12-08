@@ -7,8 +7,7 @@
     <!--=============== FAVICON ===============-->
     <link
       rel="shortcut icon"
-      href="assets/img/favicon.png
-      "
+      href="assets/img/favicon.png"
       type="image/x-icon"
     />
 
@@ -27,9 +26,9 @@
 
     <title>Responsive real state website - Bedimcode</title>
   </head>
-  <body>
+  <body onload="read()">
     <!--==================== HEADER ====================-->
-    <header class="header" id="header">
+    <header class="header " id="header">
       <nav class="nav container">
         <a href="#" class="nav__logo"
           >Holux <i class="bx bxs-home-alt-2"></i
@@ -122,8 +121,8 @@
           <h2 class="section__title">Popular Residences<span>.</span></h2>
 
           <div class="popular__container swiper">
-            <div class="swiper-wrapper">
-              <article class="popular__card swiper-slide">
+            <div class="swiper-wrapper" id="wrapper">
+              <!-- <article class="popular__card swiper-slide">
                 <img
                   src="assets/img/popular1.jpg"
                   alt=""
@@ -202,7 +201,7 @@
                     #9876
                   </p>
                 </div>
-              </article>
+              </article> -->
             </div>
 
             <div class="swiper-button-next">
@@ -312,13 +311,7 @@
       <!--==================== CONTACT ====================-->
       <section class="contact section" id="contact">
         <div class="contact__container container grid">
-          <div class="contact__images">
-            <div class="contact__orbe"></div>
-            <div class="contact__img">
-              <img src="assets/img/contact.png" alt="" />
-            </div>
-          </div>
-          <div class="contact__content">
+           <div class="contact__content">
             <div class="contact__data">
               <span class="section__subtitle">contact Us</span>
 
@@ -374,7 +367,13 @@
                 <button class="button contact__card-button">Message Now</button>
               </div>
             </div>
+          </div><div class="contact__images">
+            <div class="contact__orbe"></div>
+            <div class="contact__img">
+              <img src="assets/img/contact.png" alt="" />
+            </div>
           </div>
+         
         </div>
       </section>
 

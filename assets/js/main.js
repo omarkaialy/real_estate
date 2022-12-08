@@ -1,3 +1,128 @@
+async function read() {
+  var Appartment = Parse.Object.extend("Appartment");
+
+  query = new Parse.Query(Appartment);
+
+  let result = await query.find();
+  for (let index = 0; index < result.length; index++) {
+    let article = document.createElement("article");
+    let articleImg = document.createElement("img");
+    let articlePopular = document.createElement("div");
+    let articlePopularPrice = document.createElement("h2");
+    let articlePopularTitle = document.createElement("h3");
+    let articlePopularDescription = document.createElement("p");
+    article.className = "popular__card swiper-slide x";
+    articlePopular.className = "popular__data";
+    articlePopularPrice.className = "popular__title";
+
+    const element = result[index];
+    article.appendChild(articleImg);
+    article.appendChild(articlePopular);
+    articlePopularPrice.innerHTML = element.get("price");
+    articlePopularTitle.innerHTML = element.get("name");
+    articlePopularDescription.innerHTML = element.get("address");
+    articlePopular.appendChild(articlePopularPrice);
+    articlePopular.appendChild(articlePopularTitle);
+    articlePopular.appendChild(articlePopularDescription);
+    let wrapper = document.getElementById("wrapper");
+    wrapper.appendChild(article);
+  }
+}
+
+function create() {
+  var Appartment = Parse.Object.extend("Appartment");
+  const mypet = new Appartment();
+  var modal = document.getElementById("modal__add");
+
+  var textName = "myName";
+  mypet.set("name", textName);
+
+  mypet
+    .save()
+    .then(function (appartment) {
+      console.log(
+        "Appartment created successful with name: " +
+          appartment.get("name") +
+          " and age: " +
+          appartment.get("agePet")
+      );
+      modal.style.display = "none";
+    })
+    .catch(function (error) {
+      console.log("Error: " + error.message);
+    });
+}
+
+function readThenUpdate() {
+  var Appartment = Parse.Object.extend("Appartment");
+  textName = "myName";
+
+  query = new Parse.Query(Appartment);
+  query.equalTo("name", textName);
+  query
+    .first()
+    .then(function (pet) {
+      if (pet) {
+        console.log("Appartment found with name: " + pet.get("name"));
+        update(pet);
+      } else {
+        console.log("Nothing found, please try again");
+      }
+    })
+    .catch(function (error) {
+      console.log("Error: " + error.code + " " + error.message);
+    });
+}
+function update(foundPet) {
+  textName = "myName";
+  foundPet.set("name", textName);
+
+  foundPet
+    .save()
+    .then(function (pet) {
+      console.log("Appartment updated! Name: " + pet.get("name"));
+    })
+    .catch(function (error) {
+      console.log("Error: " + error.message);
+    });
+}
+// Api Delete
+
+function readThenDelete() {
+  var Appartment = Parse.Object.extend("Appartment");
+  textName = "myName";
+  query = new Parse.Query(Appartment);
+  query.equalTo("name", textName);
+  query
+    .first()
+    .then(function (pet) {
+      if (pet) {
+        console.log("Appartment found with name: " + pet.get("name"));
+        deletePet(pet);
+      } else {
+        console.log("Nothing found, please try again");
+        return null;
+      }
+    })
+    .catch(function (error) {
+      console.log("Error: " + error.code + " " + error.message);
+      return null;
+    });
+}
+
+function deletePet(foundPet) {
+  foundPet
+    .destroy()
+    .then(function (response) {
+      console.log(
+        "Appartment " + foundPet.get("name") + " erased successfully"
+      );
+    })
+    .catch(function (response, error) {
+      console.log("Error: " + error.message);
+    });
+}
+
 /*=============== CHANGE BACKGROUND HEADER ===============*/
 function scrollHeader() {
   const header = document.getElementById("header");
@@ -10,7 +135,7 @@ var swiperPopular = new Swiper(".popular__container", {
   grabCursor: true,
   centeredSlides: true,
   slidesPerView: "auto",
-  loop: true,
+  loop: false,
   navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
 });
 /*=============== VALUE ACCORDION ===============*/
@@ -96,16 +221,16 @@ themeButton.addEventListener("click", () => {
 const sr = ScrollReveal({
   origin: "top",
   distance: "60px",
-  duration: 2500,
-  delay: 400,
+  duration: 2000,
+  delay: 100,
   reset: true,
 });
 sr.reveal(
   ".home__title, .popular__container  , .subscribe__container ,.footer--container "
 );
-sr.reveal(".home__description,.footer--info", { delay: 500 });
-sr.reveal(".home__search", { delay: 600 });
-sr.reveal(".home__value", { delay: 700 });
+sr.reveal(".home__description,.footer--info", { delay: 200 });
+sr.reveal(".home__search", { delay: 300 });
+sr.reveal(".home__value", { delay: 400 });
 
 sr.reveal(".value__images", { origin: "left" });
 sr.reveal(".value__content", { origin: "right" });
@@ -113,134 +238,14 @@ sr.reveal(".value__content", { origin: "right" });
 sr.reveal(".contact__images", { origin: "right" });
 sr.reveal(".contact__content", { origin: "left" });
 // Api Request
-
-function create() {
-  var Appartment = Parse.Object.extend("Appartment");
-  const mypet = new Appartment();
-  var modal = document.getElementById("modal__add");
-
-  var textName = "myName";
-  mypet.set("name", textName);
-
-  mypet
-    .save()
-    .then(function (appartment) {
-      console.log(
-        "Appartment created successful with name: " +
-          appartment.get("name") +
-          " and age: " +
-          appartment.get("agePet")
-      );
-      modal.style.display = "none";
-    })
-    .catch(function (error) {
-      console.log("Error: " + error.message);
-    });
-}
 // Api Read
-async function read() {
-  var Appartment = Parse.Object.extend("Appartment");
-  query = new Parse.Query(Appartment);
 
-  let result = await query.find();
-  for (let index = 0; index < result.length; index++) {
-    const element = result[index];
-    console.log(
-      "House Name " +
-        element.get("name") +
-        " House Price " +
-        element.get("price")
-    );
-  }
-  // query
-  //   .first()
-  //   .then(function (pet) {
-  //     if (pet) {
-  //       console.log(
-  //         "Appartment found successful with name: " +
-  //           pet.get("name") +
-  //           " and address: " +
-  //           pet.get("address")
-  //       );
-  //     } else {
-  //       console.log("Nothing found, please try again");
-  //     }
-  //   })
-  //   .catch(function (error) {
-  //     console.log("Error: " + error.code + " " + error.message);
-  //   });
-}
-// Api Update
+// let articlesImages = document.querySelectorAll(".swiper-wrapper article img");
+// let articlesTitles = document.querySelectorAll(
+//   ".swiper-wrapper article .popular__title"
+// );
+// console.log(articlesImages);
 
-function readThenUpdate() {
-  var Appartment = Parse.Object.extend("Appartment");
-  textName = "myName";
-
-  query = new Parse.Query(Appartment);
-  query.equalTo("name", textName);
-  query
-    .first()
-    .then(function (pet) {
-      if (pet) {
-        console.log("Appartment found with name: " + pet.get("name"));
-        update(pet);
-      } else {
-        console.log("Nothing found, please try again");
-      }
-    })
-    .catch(function (error) {
-      console.log("Error: " + error.code + " " + error.message);
-    });
-}
-function update(foundPet) {
-  textName = "myName";
-  foundPet.set("name", textName);
-
-  foundPet
-    .save()
-    .then(function (pet) {
-      console.log("Appartment updated! Name: " + pet.get("name"));
-    })
-    .catch(function (error) {
-      console.log("Error: " + error.message);
-    });
-}
-// Api Delete
-
-function readThenDelete() {
-  var Appartment = Parse.Object.extend("Appartment");
-  textName = "myName";
-  query = new Parse.Query(Appartment);
-  query.equalTo("name", textName);
-  query
-    .first()
-    .then(function (pet) {
-      if (pet) {
-        console.log("Appartment found with name: " + pet.get("name"));
-        deletePet(pet);
-      } else {
-        console.log("Nothing found, please try again");
-        return null;
-      }
-    })
-    .catch(function (error) {
-      console.log("Error: " + error.code + " " + error.message);
-      return null;
-    });
-}
-
-function deletePet(foundPet) {
-  foundPet
-    .destroy()
-    .then(function (response) {
-      console.log(
-        "Appartment " + foundPet.get("name") + " erased successfully"
-      );
-    })
-    .catch(function (response, error) {
-      console.log("Error: " + error.message);
-    });
-}
 const showModalAdd = document.querySelectorAll(".subscribe__button");
 showModalAdd.forEach((item) => {
   item.addEventListener("click", () => {
@@ -258,7 +263,7 @@ function showAddModal() {
     modal.style.display = "none";
   });
   createbtn.addEventListener("click", () => {
-    create();
+    read();
   });
 }
 
