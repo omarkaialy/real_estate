@@ -1,3 +1,4 @@
+// Api requests
 async function read() {
   var Appartment = Parse.Object.extend("Appartment");
 
@@ -13,114 +14,128 @@ async function read() {
     let articlePopularDescription = document.createElement("p");
     article.className = "popular__card swiper-slide x";
     articlePopular.className = "popular__data";
-    articlePopularPrice.className = "popular__title";
+    articlePopularPrice.className = "popular__price";
+    articlePopularTitle.className = "popular__title";
+    articlePopularDescription.className = "popular__description";
 
     const element = result[index];
     article.appendChild(articleImg);
+
     article.appendChild(articlePopular);
+    // article.appendChild(objectId);
     articlePopularPrice.innerHTML = element.get("price");
     articlePopularTitle.innerHTML = element.get("name");
     articlePopularDescription.innerHTML = element.get("address");
+    articleImg.className = "popular__img";
+    articleImg.src = element.get("image");
     articlePopular.appendChild(articlePopularPrice);
     articlePopular.appendChild(articlePopularTitle);
     articlePopular.appendChild(articlePopularDescription);
     let wrapper = document.getElementById("wrapper");
     wrapper.appendChild(article);
   }
+  const showDetailsModal = document.querySelectorAll(".popular__card");
+  showDetailsModal.forEach((item) => {
+    item.addEventListener("click", () => {
+      document.getElementById("detailModal").style.display = "block";
+      document.getElementById("property__name").value = item
+        .querySelector(".popular__data")
+        .querySelector(".popular__title").innerHTML;
+      document.getElementById("property__image").src =
+        item.querySelector(".popular__img").src;
+      document.getElementById("property__price").value = item
+        .querySelector(".popular__data")
+        .querySelector(".popular__price").innerHTML;
+      document.getElementById("property__address").value = item
+        .querySelector(".popular__data")
+        .querySelector(".popular__description").innerHTML;
+
+      var closeButton = document.getElementById("close_modal");
+      var deleteBtn = document.getElementById("delete");
+      var updateBtn = document.getElementById("update");
+      closeButton.addEventListener("click", () => {
+        document.getElementById("detailModal").style.display = "none";
+      });
+      deleteBtn.addEventListener("click", () => {
+        readThenDelete(
+          item.querySelector(".popular__data").querySelector(".popular__title")
+            .innerHTML
+        );
+      });
+      updateBtn.addEventListener("click", () => {
+        readThenUpdate(
+          item.querySelector(".popular__data").querySelector(".popular__title")
+            .innerHTML
+        );
+      });
+    });
+  });
 }
 
 function create() {
   var Appartment = Parse.Object.extend("Appartment");
-  const mypet = new Appartment();
+  const newAppartment = new Appartment();
+
   var modal = document.getElementById("modal__add");
 
-  var textName = "myName";
-  mypet.set("name", textName);
-
-  mypet
-    .save()
-    .then(function (appartment) {
-      console.log(
-        "Appartment created successful with name: " +
-          appartment.get("name") +
-          " and age: " +
-          appartment.get("agePet")
-      );
-      modal.style.display = "none";
-    })
-    .catch(function (error) {
-      console.log("Error: " + error.message);
+  var name = document.getElementById("property__name").value;
+  var price = document.getElementById("property__price").value;
+  var address = document.getElementById("property__address").value;
+  var fileUploadControl = document.getElementById("imageFile");
+  var image;
+  fileUploadControl.addEventListener("change", (target) => {
+    console.log(target.files.length);
+  });
+  if (fileUploadControl.files.length > 0) {
+    var file = fileUploadControl.files[0];
+    var fileName = file.name;
+    console.log("file uploaded" + fileName);
+    const parseFile = new Parse.File("image.jpg", file);
+    parseFile.save().then((img) => {
+      image = img._url;
+      {
+        newAppartment.set("name", name);
+        newAppartment.set("address", address);
+        newAppartment.set("price", price);
+        newAppartment.set("image", img._url);
+        newAppartment.save().then((res) => {
+          console.log("created Successfully" + res);
+          modal.style.display = "none";
+        });
+      }
     });
+  }
+  // modal.style.display = "none";
 }
 
-function readThenUpdate() {
+function readThenUpdate(name) {
   var Appartment = Parse.Object.extend("Appartment");
-  textName = "myName";
 
   query = new Parse.Query(Appartment);
-  query.equalTo("name", textName);
-  query
-    .first()
-    .then(function (pet) {
-      if (pet) {
-        console.log("Appartment found with name: " + pet.get("name"));
-        update(pet);
-      } else {
-        console.log("Nothing found, please try again");
-      }
-    })
-    .catch(function (error) {
-      console.log("Error: " + error.code + " " + error.message);
-    });
-}
-function update(foundPet) {
-  textName = "myName";
-  foundPet.set("name", textName);
-
-  foundPet
-    .save()
-    .then(function (pet) {
-      console.log("Appartment updated! Name: " + pet.get("name"));
-    })
-    .catch(function (error) {
-      console.log("Error: " + error.message);
-    });
+  query.equalTo("name", name);
+  query.first().then(function (Appartment) {
+    if (Appartment) {
+      Appartment.set("price", document.getElementById("property__price").value);
+      Appartment.set(
+        "address",
+        document.getElementById("property__address").value
+      );
+      foundPet.save();
+    }
+  });
 }
 // Api Delete
 
-function readThenDelete() {
+function readThenDelete(name) {
   var Appartment = Parse.Object.extend("Appartment");
-  textName = "myName";
+  textName = name;
   query = new Parse.Query(Appartment);
   query.equalTo("name", textName);
-  query
-    .first()
-    .then(function (pet) {
-      if (pet) {
-        console.log("Appartment found with name: " + pet.get("name"));
-        deletePet(pet);
-      } else {
-        console.log("Nothing found, please try again");
-        return null;
-      }
-    })
-    .catch(function (error) {
-      console.log("Error: " + error.code + " " + error.message);
-      return null;
-    });
-}
-
-function deletePet(foundPet) {
-  foundPet
-    .destroy()
-    .then(function (response) {
-      console.log(
-        "Appartment " + foundPet.get("name") + " erased successfully"
-      );
-    })
-    .catch(function (response, error) {
-      console.log("Error: " + error.message);
-    });
+  query.first().then(function (pet) {
+    if (pet) {
+      pet.destroy();
+    }
+  });
 }
 
 /*=============== CHANGE BACKGROUND HEADER ===============*/
@@ -133,7 +148,7 @@ window.addEventListener("scroll", scrollHeader);
 var swiperPopular = new Swiper(".popular__container", {
   spaceBetween: 32,
   grabCursor: true,
-  centeredSlides: true,
+  centeredSlides: false,
   slidesPerView: "auto",
   loop: false,
   navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
@@ -237,14 +252,7 @@ sr.reveal(".value__content", { origin: "right" });
 
 sr.reveal(".contact__images", { origin: "right" });
 sr.reveal(".contact__content", { origin: "left" });
-// Api Request
-// Api Read
-
-// let articlesImages = document.querySelectorAll(".swiper-wrapper article img");
-// let articlesTitles = document.querySelectorAll(
-//   ".swiper-wrapper article .popular__title"
-// );
-// console.log(articlesImages);
+/*================ Modals ==================*/
 
 const showModalAdd = document.querySelectorAll(".subscribe__button");
 showModalAdd.forEach((item) => {
@@ -252,18 +260,17 @@ showModalAdd.forEach((item) => {
     showAddModal();
   });
 });
-//  Modal
+
 function showAddModal() {
   var modal = document.getElementById("modal__add");
   modal.style.display = "block";
-  // Get the <span> element that closes the modal
-  var span = document.getElementById("close_modal");
-  var createbtn = document.getElementById("createbtn");
-  span.addEventListener("click", () => {
+  var closeButton = document.getElementById("close_modal");
+  var createBtn = document.getElementById("createbtn");
+  closeButton.addEventListener("click", () => {
     modal.style.display = "none";
   });
-  createbtn.addEventListener("click", () => {
-    read();
+  createBtn.addEventListener("click", () => {
+    create();
   });
 }
 
@@ -271,5 +278,9 @@ window.onclick = function (event) {
   var modal = document.getElementById("modal__add");
   if (event.target == modal) {
     modal.style.display = "none";
+  }
+  var detailModal = document.getElementById("detailModal");
+  if (event.target == detailModal) {
+    detailModal.style.display = "none";
   }
 };

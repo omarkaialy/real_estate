@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!--=============== FAVICON ===============-->
-    <link
-      rel="shortcut icon"
-      href="assets/img/favicon.png"
-      type="image/x-icon"
-    />
+        <link
+          rel="shortcut icon"
+          href="assets/img/favicon.png"
+          type="image/x-icon"
+        />
 
     <!--=============== BOXICONS ===============-->
     <link
@@ -24,15 +24,17 @@
     <!--=============== CSS ===============-->
     <link rel="stylesheet" href="assets/css/styles.css " />
 
-    <title>Responsive real state website - Bedimcode</title>
+    <title>Responsive real state website</title>
   </head>
   <body onload="read()">
     <!--==================== HEADER ====================-->
     <header class="header " id="header">
       <nav class="nav container">
         <a href="#" class="nav__logo"
-          >Holux <i class="bx bxs-home-alt-2"></i
-        ></a>
+          >RState <i class="bx bxs-home-alt-2"></i
+        >
+      
+      </a>
         <div class="nav__menu">
           <ul class="nav__list">
             <li class="nav__item">
@@ -66,8 +68,7 @@
     <!--==================== MAIN ====================-->
     <main class="main">
       <!--==================== HOME ====================-->
-      <section class="home section" id="home"></section>
-      <div class="home--wrap">
+      <section class="home section" id="home">  <div class="home--wrap">
         <div class="home__data container grid">
           <h1 class="home__title">
             Discover <br />
@@ -113,7 +114,8 @@
         </div>
       </div>
    
-
+</section>
+    
       <!--==================== POPULAR ====================-->
       <section class="popular section" id="popular">
         <div class="container">
@@ -380,7 +382,7 @@
       <!--==================== SUBSCRIBE ====================-->
       <section class="subscribe section">
         <div class="subscribe__container container">
-          <h1 class="subscribe__title">Get Started with Holux</h1>
+          <h1 class="subscribe__title">Get Started with Us</h1>
           <p class="subscribe__description">
             Subscribe and find super attractive price quotes from us, Find your
             residence soon
@@ -477,25 +479,54 @@
         </div>
       </div>
       <div class="footer--info container">
-        <span class="footer--copy"> &#169; Bedimcode. All right reserved </span>
+        <span class="footer--copy"> &#169; IT Team . All right reserved </span>
         <div class="footer--privacy">
           <a href="#">Terms & Agreements</a>
           <a href="#">Policy Policy</a>
         </div>
       </div>
     </footer>
+    <!-- Detail Modal -->
+    <div id="detailModal" class="detailModal">
+      <div class="modal-content">
+        <ul class="add__element">
+          <li class="add__header"><h1>Add A New Property</h1></li>
+          <li><img id="property__image" src="" alt=""> </li>
+
+          <li>
+            <input class="input" id="property__name" type="text" placeholder="Property Name" disabled />
+          </li>
+          <input class="input" id="property__price" type="number" placeholder="Property Price" />
+          <li>
+            <input
+            class="input"
+              id="property__address"
+              type="text"
+              placeholder="Property Address"
+            />
+          </li>
+          <li>
+            <button class="close__button" id="close_modal">Close</button> 
+            <button class="close__button" id="delete">Delete</button> 
+            <button class="create__button" id="update">Update</button> 
+          </li>
+        </ul>
+      </div>
+    </div>
+     
     <!-- Modal To Create A new House -->
     <div id="modal__add" class="modal">
       <div class="modal-content">
         <ul class="add__element">
           <li class="add__header"><h1>Add A New Property</h1></li>
           <li>
-            <input id="username" type="text" placeholder="Property Name" />
+            <input class="input" id="property__name" type="text" placeholder="Property Name" />
           </li>
-          <input id="email" type="number" placeholder="Property Price" />
+          <input class="input" id="property__price" type="number" placeholder="Property Price" />
           <li>
             <input
-              id="password"
+            class="input"
+              id="property__address"
               type="text"
               placeholder="Property Address"
             />
