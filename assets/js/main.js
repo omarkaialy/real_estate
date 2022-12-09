@@ -38,15 +38,15 @@ async function read() {
   showDetailsModal.forEach((item) => {
     item.addEventListener("click", () => {
       document.getElementById("detailModal").style.display = "block";
-      document.getElementById("property__name").value = item
+      document.getElementById("dproperty__name").value = item
         .querySelector(".popular__data")
         .querySelector(".popular__title").innerHTML;
       document.getElementById("property__image").src =
         item.querySelector(".popular__img").src;
-      document.getElementById("property__price").value = item
+      document.getElementById("dproperty__price").value = item
         .querySelector(".popular__data")
         .querySelector(".popular__price").innerHTML;
-      document.getElementById("property__address").value = item
+      document.getElementById("dproperty__address").value = item
         .querySelector(".popular__data")
         .querySelector(".popular__description").innerHTML;
 

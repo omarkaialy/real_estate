@@ -262,7 +262,7 @@ box-shadow: 0 4px 8px hsla(228, 66% ,45% ,.25);
 .home__search {
   background-color: var(--body-color);
   padding: 0.35rem 0.35rem 0.35rem 0.75rem;
-  display: flex;
+  display: flex;    height: 55%;
   align-items: center;
   border-radius: 0.75rem;
   border: 3px solid var(--text-color-light);
@@ -791,6 +791,7 @@ justify-content: center;}
     width: 342px;
   }
   .home__search{width: 95%;
+
   margin-bottom: 4rem;}
 .contact__card{grid-template-columns: repeat(2,192px);}
 .footer--content{grid-template-columns: repeat(3,max-content);}
